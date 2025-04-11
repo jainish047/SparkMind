@@ -1,0 +1,266 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // for migration
+}
+
+model user {
+  id                  String     @id @default(uuid())
+  name                String?
+  profilePic          String?
+  email               String     @unique
+  profileComplete     Boolean    @default(false)
+  role                UserRole
+  password            String?
+  provider            String     @default("local")
+  googleId            String?
+  phoneNumber         String?
+  bio                 String?
+  skills              String[]
+  location            String?
+  country             String?
+  active              Boolean    @default(true)
+  dob                 DateTime?
+  languages           String[]
+  rating              Float?     @default(0)
+  experience          Json?
+  dateJoined          DateTime?  @default(now())
+  emailVerified       Boolean    @default(false)
+  phoneNumberVerified Boolean    @default(false)
+  projects            project[]  @relation("ClientProjects")
+  bids                bid[]      @relation("UserBids")
+  freelancingProjects project[]  @relation("FreelancerProjects")
+  bookmarks           bookmark[]
+  lists               list[]
+  listItems           listItem[]
+  sentMessages        Message[]  @relation("SentMessages")
+  receivedMessages    Message[]  @relation("ReceivedMessages")
+  blogs               Blog[]     @relation("blog")
+  bankAccount         BankAccount? @relation("BankAccount")
+  paid                transaction [] @relation("FromUser")
+  received           transaction[] @relation("ToUser")
+
+  // Add these fields to resolve the relation error:
+  following follow[] @relation("FollowerRelation")
+  followers follow[] @relation("FollowingRelation")
+}
+
+model project {
+  id                     String        @id @default(uuid())
+  userId                 String
+  user                   user          @relation("ClientProjects", fields: [userId], references: [id], onDelete: Cascade)
+  title                  String
+  description            String
+  purpose                String?
+  platform               String?
+  inProjectPaymentMethod String?
+  minBudget              Int
+  maxBudget              Int
+  status                 ProjectStatus @default(OPEN) // Tracks project progress
+  createdAt              DateTime      @default(now())
+  dueDate                DateTime?
+  documents              String[] // Array of document URLs
+  skillsRequired         String[] // Example: ["React", "Node.js"]
+  paymentMethod          PaymentType?
+  noOfBids               Int?          @default(0)
+  averageBidBudget       Int?          @default(0)
+  bids                   bid[]         @relation("ProjectBids") // All bids on this project
+  assignedTo             String?       // Nullable, as it may not be assigned to anyone initially
+  freelancer             user?         @relation("FreelancerProjects", fields: [assignedTo], references: [id], onDelete: SetNull)
+  bookmarks              bookmark[] // Bookmarks for this project
+  listItems              listItem[] // List items for this project
+  transactions          transaction[] // Transactions related to this project
+  milestones             milestone[] // Milestones related to this project
+}
+
+model bid {
+  id           String   @id @default(uuid())
+  projectId    String
+  userId       String
+  project      project  @relation("ProjectBids", fields: [projectId], references: [id], onDelete: Cascade)
+  user         user     @relation("UserBids", fields: [userId], references: [id], onDelete: Cascade)
+  amount       Float
+  deliveryTime Int?
+  proposal     String
+  milestones   Json?
+  createdAt    DateTime @default(now())
+}
+
+model follow {
+  id          String   @id @default(uuid())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  follower  user @relation(name: "FollowerRelation", fields: [followerId], references: [id], onDelete: Cascade)
+  following user @relation(name: "FollowingRelation", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+}
+
+model bookmark {
+  id        String   @id @default(uuid())
+  userId    String
+  projectId String
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, projectId]) // Prevent duplicate bookmarks
+  @@index([userId])
+  @@index([projectId])
+}
+
+model list {
+  id        String     @id @default(uuid())
+  userId    String
+  name      String
+  type      ListType // New Enum to specify what type of list it is
+  user      user       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     listItem[]
+  createdAt DateTime   @default(now())
+
+  @@unique([userId, name]) // A user cannot have two lists with the same name
+  @@index([userId]) // Faster queries when fetching lists by user
+}
+
+model listItem {
+  id        String   @id @default(uuid())
+  listId    String
+  projectId String? // Nullable, since it can also store userId
+  userId    String? // Nullable, since it can also store projectId
+  list      list     @relation(fields: [listId], references: [id], onDelete: Cascade)
+  project   project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      user?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([listId, projectId, userId]) // Prevent duplicate items in the same list
+  @@index([listId]) // Optimize lookups by list
+  @@index([projectId]) // Optimize project-related queries
+  @@index([userId]) // Optimize user-related queries
+}
+
+enum ListType {
+  PROJECT
+  USER
+}
+
+enum PaymentType {
+  HOURLY
+  FIXED
+}
+
+enum UserRole {
+  WORK
+  HIRE
+}
+
+enum ProjectStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELED
+}
+
+model skills {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Country {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model languages {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  sender     user     @relation("SentMessages", fields: [senderId], references: [id])
+  senderId   String
+  receiver   user     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId String
+  createdAt  DateTime @default(now())
+}
+
+model Blog {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  imageUrl  String?
+  authorId  String
+  author    user     @relation("blog", fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model BankAccount {
+  id                 String   @id @default(uuid())
+  userId             String   @unique
+  user               user     @relation("BankAccount", fields: [userId], references: [id])
+  accountNumber      String
+  ifsc               String
+  accountHolderName  String
+  verified           Boolean  @default(false)
+  createdAt          DateTime @default(now())
+}
+
+model transaction {
+  id            String      @id @default(uuid())
+  fromUserId    String?
+  toUserId      String?
+  projectId     String?
+  milestoneId   String?
+  amount        Float
+  type          TransactionType // ASSIGNMENT_PAYMENT | MILESTONE_PAYOUT
+  status        TransactionStatus // PENDING | SUCCESS | FAILED
+  createdAt     DateTime    @default(now())
+
+  fromUser      user?       @relation("FromUser", fields: [fromUserId], references: [id])
+  toUser        user?       @relation("ToUser", fields: [toUserId], references: [id])
+  project       project?    @relation(fields: [projectId], references: [id])
+}
+
+enum TransactionType {
+  ASSIGNMENT_PAYMENT
+  MILESTONE_PAYOUT
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model milestone {
+  id          String    @id @default(uuid())
+  projectId   String
+  title       String
+  amount      Float
+  status      MilestoneStatus // PENDING | COMPLETED | PAID
+  dueDate     DateTime?
+  completedAt DateTime?
+
+  project     project   @relation(fields: [projectId], references: [id])
+  // transactions transaction[]
+}
+
+enum MilestoneStatus {
+  PENDING
+  COMPLETED
+  PAID
+}

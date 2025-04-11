@@ -1,0 +1,1167 @@
+{
+  "users": [
+    {
+      "id": "a299e850-1da7-43fb-8428-4fa92efccc4d",
+      "name": "Jainish Patel",
+      "profilePic": "https://lh3.googleusercontent.com/a/ACg8ocInDR7XTZ1U7s6IteeumB-erfiv0Sl467AmM1K4hkpKAHU-Zg=s96-c",
+      "email": "jainishacc2@gmail.com",
+      "role": "WORK",
+      "password": null,
+      "provider": "google",
+      "googleId": "106708257717212171613",
+      "phoneNumber": null,
+      "bio": "A dedicated full-stack software engineer with over eight years of experience in designing and developing scalable web applications. Proficient in both front-end and back-end technologies, they have a strong command of JavaScript frameworks like React and Node.js, as well as robust server-side languages. This individual is known for their ability to architect complex systems that are both efficient and secure. Their work ethic is characterized by a methodical approach to problem-solving, ensuring that each piece of code not only meets functional requirements but also adheres to industry best practices for performance and maintainability.",
+      "skills": [
+        "4",
+        "5",
+        "9",
+        "10"
+      ],
+      "location": "West Bengal",
+      "country": "4",
+      "active": true,
+      "dob": null,
+      "languages": [],
+      "rating": 4,
+      "experience": null,
+      "dateJoined": "2025-03-18T20:41:20.988Z",
+      "emailVerified": true,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "user-3",
+      "name": "Charlie Davis",
+      "profilePic": null,
+      "email": "charlie@example.com",
+      "role": "WORK",
+      "password": null,
+      "provider": "local",
+      "googleId": null,
+      "phoneNumber": "3456789012",
+      "bio": "A cybersecurity professional with a keen eye for identifying and mitigating vulnerabilities across diverse digital platforms. With comprehensive knowledge of network security protocols, encryption standards, and penetration testing methodologies, they proactively safeguard systems against emerging threats. Their approach is both technical and strategic, combining rigorous analysis with a deep understanding of potential attack vectors to enhance security postures. They are committed to continuous improvement and ethical practices, often collaborating with development teams to implement secure coding standards and conduct regular security audits. This expertise ensures that organizational assets remain protected in an increasingly complex digital landscape.",
+      "skills": [
+        "10",
+        "11",
+        "25"
+      ],
+      "location": "New Jersey",
+      "country": "1",
+      "active": true,
+      "dob": "1995-07-11T00:00:00.000Z",
+      "languages": [
+        "English"
+      ],
+      "rating": 2.3,
+      "experience": {},
+      "dateJoined": "2025-03-23T20:58:26.898Z",
+      "emailVerified": false,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "0ae4ac82-71a3-411b-8a6c-6f8450d9510e",
+      "name": "Jainish Patel",
+      "profilePic": "https://lh3.googleusercontent.com/a/ACg8ocJILD9jW1Minp0L-Yf_YN0QvKR-eRnSZhFfJZ7yeQGUeNuixA=s96-c",
+      "email": "jdp5420950@gmail.com",
+      "role": "WORK",
+      "password": "$2b$10$eXdRZSJxBVnqDUcOt0iiqek581.YtrmNAN2pT5QOC63EbJg2JEmXS",
+      "provider": "google",
+      "googleId": "100692922221109124118",
+      "phoneNumber": null,
+      "bio": "An analytical data scientist with a deep passion for extracting actionable insights from vast datasets, specializing in statistical analysis and machine learning algorithms. With a solid foundation in Python and a strong background in mathematics and statistics, this professional excels at building predictive models that drive decision-making in dynamic environments. Their expertise spans from data cleaning and feature engineering to deploying scalable machine learning solutions in cloud environments. They continuously learn and adopt the latest advancements in AI research, striving to bridge the gap between theoretical innovations and practical applications.",
+      "skills": [
+        "5",
+        "2",
+        "20"
+      ],
+      "location": "Pune, Maharashtra",
+      "country": "4",
+      "active": true,
+      "dob": null,
+      "languages": [],
+      "rating": 2.2,
+      "experience": null,
+      "dateJoined": "2025-03-18T20:40:57.660Z",
+      "emailVerified": true,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "user-1",
+      "name": "Alice Johnson",
+      "profilePic": null,
+      "email": "alice@example.com",
+      "role": "WORK",
+      "password": null,
+      "provider": "local",
+      "googleId": null,
+      "phoneNumber": "1234567890",
+      "bio": "A dedicated full-stack software engineer with over eight years of experience in designing and developing scalable web applications. Proficient in both front-end and back-end technologies, they have a strong command of JavaScript frameworks like React and Node.js, as well as robust server-side languages. This individual is known for their ability to architect complex systems that are both efficient and secure. Their work ethic is characterized by a methodical approach to problem-solving, ensuring that each piece of code not only meets functional requirements but also adheres to industry best practices for performance and maintainability.",
+      "skills": [
+        "10",
+        "5",
+        "26"
+      ],
+      "location": "USA",
+      "country": "2",
+      "active": true,
+      "dob": "1990-05-15T00:00:00.000Z",
+      "languages": [
+        "English"
+      ],
+      "rating": 5,
+      "experience": {},
+      "dateJoined": "2025-03-23T20:58:26.445Z",
+      "emailVerified": true,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "user-4",
+      "name": "David Lee",
+      "profilePic": null,
+      "email": "david@example.com",
+      "role": "HIRE",
+      "password": null,
+      "provider": "local",
+      "googleId": null,
+      "phoneNumber": "4567890123",
+      "bio": "A dedicated full-stack software engineer with over eight years of experience in designing and developing scalable web applications. Proficient in both front-end and back-end technologies, they have a strong command of JavaScript frameworks like React and Node.js, as well as robust server-side languages. This individual is known for their ability to architect complex systems that are both efficient and secure. Their work ethic is characterized by a methodical approach to problem-solving, ensuring that each piece of code not only meets functional requirements but also adheres to industry best practices for performance and maintainability.",
+      "skills": [
+        "20",
+        "24",
+        "26"
+      ],
+      "location": "Delhi",
+      "country": "4",
+      "active": true,
+      "dob": "1992-03-25T00:00:00.000Z",
+      "languages": [
+        "English",
+        "German"
+      ],
+      "rating": 1.3,
+      "experience": {},
+      "dateJoined": "2025-03-23T20:58:27.198Z",
+      "emailVerified": true,
+      "phoneNumberVerified": true
+    },
+    {
+      "id": "06175d70-9d1c-40db-a2d2-57835256f181",
+      "name": "Prince Patel",
+      "profilePic": "https://lh3.googleusercontent.com/a/ACg8ocLuBEKHhUKwzrrJRGLwerluLwUXheWfbYKm2L5yLnNzn7iWR3E=s96-c",
+      "email": "princepatel1128@gmail.com",
+      "role": "WORK",
+      "password": null,
+      "provider": "google",
+      "googleId": "112558703135925560526",
+      "phoneNumber": null,
+      "bio": "A dedicated full-stack software engineer with over eight years of experience in designing and developing scalable web applications. Proficient in both front-end and back-end technologies, they have a strong command of JavaScript frameworks like React and Node.js, as well as robust server-side languages. This individual is known for their ability to architect complex systems that are both efficient and secure. Their work ethic is characterized by a methodical approach to problem-solving, ensuring that each piece of code not only meets functional requirements but also adheres to industry best practices for performance and maintainability.",
+      "skills": [
+        "1",
+        "5",
+        "10"
+      ],
+      "location": "New York",
+      "country": "1",
+      "active": true,
+      "dob": null,
+      "languages": [],
+      "rating": 2,
+      "experience": null,
+      "dateJoined": "2025-03-19T08:19:10.050Z",
+      "emailVerified": true,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "user-2",
+      "name": "Bob Smith",
+      "profilePic": null,
+      "email": "bob@example.com",
+      "role": "HIRE",
+      "password": null,
+      "provider": "google",
+      "googleId": null,
+      "phoneNumber": "2345678901",
+      "bio": "An analytical data scientist with a deep passion for extracting actionable insights from vast datasets, specializing in statistical analysis and machine learning algorithms. With a solid foundation in Python and a strong background in mathematics and statistics, this professional excels at building predictive models that drive decision-making in dynamic environments. Their expertise spans from data cleaning and feature engineering to deploying scalable machine learning solutions in cloud environments. They continuously learn and adopt the latest advancements in AI research, striving to bridge the gap between theoretical innovations and practical applications.",
+      "skills": [
+        "1",
+        "5",
+        "6"
+      ],
+      "location": "Anand, Gujarat",
+      "country": "4",
+      "active": true,
+      "dob": "1988-10-21T00:00:00.000Z",
+      "languages": [
+        "English",
+        "French"
+      ],
+      "rating": 4.6,
+      "experience": {},
+      "dateJoined": "2025-03-23T20:58:26.618Z",
+      "emailVerified": true,
+      "phoneNumberVerified": true
+    },
+    {
+      "id": "a8a4d42a-fa29-46ec-9144-fa6680b6875c",
+      "name": null,
+      "profilePic": null,
+      "email": "jainishacc1@gmail.com",
+      "role": "WORK",
+      "password": "$2b$10$GYwlQZ7cbzvW8a5Ehiqgl.qsa/.74znZOoaV2fJRkJY0b3CYNerSa",
+      "provider": "local",
+      "googleId": null,
+      "phoneNumber": null,
+      "bio": "An experienced DevOps engineer with a wealth of knowledge in continuous integration, continuous deployment (CI/CD), and cloud infrastructure management. This individual has successfully orchestrated and automated the end-to-end lifecycle of complex applications using modern tools like Docker, Kubernetes, and various cloud services. Their work is driven by a strong focus on reliability and efficiency, ensuring that development pipelines are optimized for rapid delivery without compromising system stability. They are adept at monitoring, logging, and troubleshooting, making them a key contributor to creating resilient and scalable architectures in fast-paced production environments.",
+      "skills": [
+        "20",
+        "45",
+        "78",
+        "23"
+      ],
+      "location": null,
+      "country": "2",
+      "active": true,
+      "dob": null,
+      "languages": [],
+      "rating": 4.8,
+      "experience": null,
+      "dateJoined": "2025-03-18T20:36:03.863Z",
+      "emailVerified": false,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "user-5",
+      "name": "Emma Watson",
+      "profilePic": null,
+      "email": "emma@example.com",
+      "role": "WORK",
+      "password": null,
+      "provider": "local",
+      "googleId": null,
+      "phoneNumber": "5678901234",
+      "bio": "An experienced DevOps engineer with a wealth of knowledge in continuous integration, continuous deployment (CI/CD), and cloud infrastructure management. This individual has successfully orchestrated and automated the end-to-end lifecycle of complex applications using modern tools like Docker, Kubernetes, and various cloud services. Their work is driven by a strong focus on reliability and efficiency, ensuring that development pipelines are optimized for rapid delivery without compromising system stability. They are adept at monitoring, logging, and troubleshooting, making them a key contributor to creating resilient and scalable architectures in fast-paced production environments.",
+      "skills": [
+        "10",
+        "25",
+        "21",
+        "13"
+      ],
+      "location": "Australia",
+      "country": "2",
+      "active": true,
+      "dob": "1993-09-14T00:00:00.000Z",
+      "languages": [
+        "English"
+      ],
+      "rating": 3,
+      "experience": {},
+      "dateJoined": "2025-03-23T20:58:27.349Z",
+      "emailVerified": true,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "e6f69fe0-2af3-4e8a-b7bd-186932cb7d50",
+      "name": "Raj Patel",
+      "profilePic": "https://lh3.googleusercontent.com/a/ACg8ocJQ3YQ1r4RPKWVKTr7MJQhoQ8dxK_ZD1jDxve0w96skU5udJQ=s96-c",
+      "email": "rajkumar2004patel@gmail.com",
+      "role": "WORK",
+      "password": null,
+      "provider": "google",
+      "googleId": "118286018182898826959",
+      "phoneNumber": null,
+      "bio": "An experienced DevOps engineer with a wealth of knowledge in continuous integration, continuous deployment (CI/CD), and cloud infrastructure management. This individual has successfully orchestrated and automated the end-to-end lifecycle of complex applications using modern tools like Docker, Kubernetes, and various cloud services. Their work is driven by a strong focus on reliability and efficiency, ensuring that development pipelines are optimized for rapid delivery without compromising system stability. They are adept at monitoring, logging, and troubleshooting, making them a key contributor to creating resilient and scalable architectures in fast-paced production environments.",
+      "skills": [
+        "10",
+        "45",
+        "20"
+      ],
+      "location": "Columbia",
+      "country": "1",
+      "active": true,
+      "dob": null,
+      "languages": [],
+      "rating": 1.2,
+      "experience": null,
+      "dateJoined": "2025-03-24T06:29:29.228Z",
+      "emailVerified": true,
+      "phoneNumberVerified": false
+    },
+    {
+      "id": "744bffe2-9ca6-40fb-b8bb-18139e6361f0",
+      "name": "Chetna Patel",
+      "profilePic": "https://lh3.googleusercontent.com/a/ACg8ocKvunCXRuHvqHRbXSAt-qkH_iT6Gk4mBN_u3vNHtA_2-VkDC45q=s96-c",
+      "email": "jainisarg4758@gmail.com",
+      "role": "WORK",
+      "password": null,
+      "provider": "google",
+      "googleId": "113269498985274901803",
+      "phoneNumber": null,
+      "bio": "A cybersecurity professional with a keen eye for identifying and mitigating vulnerabilities across diverse digital platforms. With comprehensive knowledge of network security protocols, encryption standards, and penetration testing methodologies, they proactively safeguard systems against emerging threats. Their approach is both technical and strategic, combining rigorous analysis with a deep understanding of potential attack vectors to enhance security postures. They are committed to continuous improvement and ethical practices, often collaborating with development teams to implement secure coding standards and conduct regular security audits. This expertise ensures that organizational assets remain protected in an increasingly complex digital landscape.",
+      "skills": [
+        "4",
+        "6",
+        "15"
+      ],
+      "location": "Ahmedabad, Gujarat",
+      "country": "4",
+      "active": true,
+      "dob": null,
+      "languages": [],
+      "rating": 3.5,
+      "experience": null,
+      "dateJoined": "2025-03-19T06:03:06.978Z",
+      "emailVerified": true,
+      "phoneNumberVerified": false
+    }
+  ],
+  "projects": [
+    {
+      "id": "1ebc5bf1-3c38-4096-9381-809f8eb47e73",
+      "userId": "744bffe2-9ca6-40fb-b8bb-18139e6361f0",
+      "title": "E-commerce Website Development",
+      "description": "A full-stack e-commerce website using React and Node.js.",
+      "minBudget": 500,
+      "maxBudget": 1500,
+      "status": "OPEN",
+      "createdAt": "2025-03-23T21:04:18.398Z",
+      "dueDate": "2025-05-15T00:00:00.000Z",
+      "documents": [
+        "https://example.com/specs.pdf"
+      ],
+      "skillsRequired": [
+        "1",
+        "2",
+        "12",
+        "19"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "9d1900b9-c4fa-4a9f-be69-a44f406b4099",
+      "userId": "06175d70-9d1c-40db-a2d2-57835256f181",
+      "title": "Data Analytics Dashboard",
+      "description": "A web-based dashboard for visualizing business analytics.",
+      "minBudget": 1500,
+      "maxBudget": 4000,
+      "status": "OPEN",
+      "createdAt": "2025-03-27T10:48:45.605Z",
+      "dueDate": "2025-09-20T00:00:00.000Z",
+      "documents": [
+        "https://example.com/analytics-dashboard.pdf"
+      ],
+      "skillsRequired": [
+        "1",
+        "23",
+        "6"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "4d1f78af-0a7a-4e59-945f-fbddfd6653c1",
+      "userId": "user-5",
+      "title": "Data Analytics Dashboard",
+      "description": "A web-based dashboard for visualizing business analytics.",
+      "minBudget": 1500,
+      "maxBudget": 4000,
+      "status": "OPEN",
+      "createdAt": "2025-03-23T21:04:18.746Z",
+      "dueDate": "2025-09-20T00:00:00.000Z",
+      "documents": [
+        "https://example.com/analytics-dashboard.pdf"
+      ],
+      "skillsRequired": [
+        "19"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "2a651931-c398-4224-9b65-eb1132f7cb5d",
+      "userId": "user-4",
+      "title": "Enterprise CRM System",
+      "description": "A robust CRM system for large enterprises.",
+      "minBudget": 2000,
+      "maxBudget": 5000,
+      "status": "COMPLETED",
+      "createdAt": "2025-03-23T21:04:18.660Z",
+      "dueDate": "2025-08-30T00:00:00.000Z",
+      "documents": [
+        "https://example.com/crm-requirements.pdf"
+      ],
+      "skillsRequired": [
+        "2",
+        "12",
+        "19",
+        "20",
+        "22"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "2d6e1242-ffb7-4a92-a6c2-043d5df7c2bc",
+      "userId": "user-2",
+      "title": "AI Chatbot for Customer Support",
+      "description": "An AI-powered chatbot to handle customer queries.",
+      "minBudget": 1000,
+      "maxBudget": 3000,
+      "status": "IN_PROGRESS",
+      "createdAt": "2025-03-23T21:04:18.488Z",
+      "dueDate": "2025-06-20T00:00:00.000Z",
+      "documents": [
+        "https://example.com/chatbot-requirements.pdf"
+      ],
+      "skillsRequired": [
+        "1",
+        "12",
+        "18",
+        "19"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "45bbdb48-e9db-4a68-bedb-0f59500863de",
+      "userId": "user-3",
+      "title": "Mobile App for Freelancers",
+      "description": "A cross-platform mobile app to connect freelancers with clients.",
+      "minBudget": 800,
+      "maxBudget": 2500,
+      "status": "COMPLETED",
+      "createdAt": "2025-03-23T21:04:18.573Z",
+      "dueDate": "2025-07-10T00:00:00.000Z",
+      "documents": [
+        "https://example.com/app-design.pdf"
+      ],
+      "skillsRequired": [
+        "1",
+        "10",
+        "20"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "3f31d606-7ef8-4921-8412-da9bace1ae35",
+      "userId": "user-1",
+      "title": "E-commerce Website Development",
+      "description": "A full-stack e-commerce website using React and Node.js.",
+      "minBudget": 500,
+      "maxBudget": 1500,
+      "status": "OPEN",
+      "createdAt": "2025-03-27T10:48:31.447Z",
+      "dueDate": "2025-05-15T00:00:00.000Z",
+      "documents": [
+        "https://example.com/specs.pdf"
+      ],
+      "skillsRequired": [
+        "10",
+        "45",
+        "23"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "cebea4c4-9efd-42db-a87f-aef85bf6c3d3",
+      "userId": "user-5",
+      "title": "Data Analytics Dashboard",
+      "description": "A web-based dashboard for visualizing business analytics.",
+      "minBudget": 1500,
+      "maxBudget": 4000,
+      "status": "OPEN",
+      "createdAt": "2025-03-27T10:48:31.880Z",
+      "dueDate": "2025-09-20T00:00:00.000Z",
+      "documents": [
+        "https://example.com/analytics-dashboard.pdf"
+      ],
+      "skillsRequired": [
+        "2",
+        "12",
+        "5",
+        "8"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "ca59c45a-d816-48de-a217-91946282340f",
+      "userId": "user-4",
+      "title": "Enterprise CRM System",
+      "description": "A robust CRM system for large enterprises.",
+      "minBudget": 2000,
+      "maxBudget": 5000,
+      "status": "IN_PROGRESS",
+      "createdAt": "2025-03-27T10:48:31.772Z",
+      "dueDate": "2025-08-30T00:00:00.000Z",
+      "documents": [
+        "https://example.com/crm-requirements.pdf"
+      ],
+      "skillsRequired": [
+        "12",
+        "5",
+        "5",
+        "6"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "b97e3375-d02c-4984-8e1d-d9c6323e923e",
+      "userId": "user-3",
+      "title": "Mobile App for Freelancers",
+      "description": "A cross-platform mobile app to connect freelancers with clients.",
+      "minBudget": 800,
+      "maxBudget": 2500,
+      "status": "COMPLETED",
+      "createdAt": "2025-03-27T10:48:31.663Z",
+      "dueDate": "2025-07-10T00:00:00.000Z",
+      "documents": [
+        "https://example.com/app-design.pdf"
+      ],
+      "skillsRequired": [
+        "2",
+        "1",
+        "4",
+        "6"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "59f3c802-21d0-4c5a-8086-7476fa3ad571",
+      "userId": "user-3",
+      "title": "Mobile App for Freelancers",
+      "description": "A cross-platform mobile app to connect freelancers with clients.",
+      "minBudget": 800,
+      "maxBudget": 2500,
+      "status": "IN_PROGRESS",
+      "createdAt": "2025-03-27T10:48:45.382Z",
+      "dueDate": "2025-07-10T00:00:00.000Z",
+      "documents": [
+        "https://example.com/app-design.pdf"
+      ],
+      "skillsRequired": [
+        "10",
+        "45",
+        "23",
+        "4"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "44cad994-8539-487f-a6eb-65e4a0455116",
+      "userId": "user-2",
+      "title": "AI Chatbot for Customer Support",
+      "description": "An AI-powered chatbot to handle customer queries.",
+      "minBudget": 1000,
+      "maxBudget": 3000,
+      "status": "OPEN",
+      "createdAt": "2025-03-27T10:48:31.558Z",
+      "dueDate": "2025-06-20T00:00:00.000Z",
+      "documents": [
+        "https://example.com/chatbot-requirements.pdf"
+      ],
+      "skillsRequired": [
+        "1",
+        "4",
+        "24"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "d64f51e9-b4ca-4efe-8851-67c3e89b0129",
+      "userId": "user-2",
+      "title": "AI Chatbot for Customer Support",
+      "description": "An AI-powered chatbot to handle customer queries.",
+      "minBudget": 1000,
+      "maxBudget": 3000,
+      "status": "COMPLETED",
+      "createdAt": "2025-03-27T10:48:45.270Z",
+      "dueDate": "2025-06-20T00:00:00.000Z",
+      "documents": [
+        "https://example.com/chatbot-requirements.pdf"
+      ],
+      "skillsRequired": [
+        "10",
+        "3",
+        "2"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "e24c11cb-05af-415a-8fbe-41736843a83a",
+      "userId": "user-1",
+      "title": "E-commerce Website Development",
+      "description": "A full-stack e-commerce website using React and Node.js.",
+      "minBudget": 500,
+      "maxBudget": 1500,
+      "status": "OPEN",
+      "createdAt": "2025-03-27T10:48:45.160Z",
+      "dueDate": "2025-05-15T00:00:00.000Z",
+      "documents": [
+        "https://example.com/specs.pdf"
+      ],
+      "skillsRequired": [
+        "1",
+        "12",
+        "14",
+        "15"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    },
+    {
+      "id": "81ec84e6-4205-4836-bdb6-d386f840aff4",
+      "userId": "user-4",
+      "title": "Enterprise CRM System",
+      "description": "A robust CRM system for large enterprises.",
+      "minBudget": 2000,
+      "maxBudget": 5000,
+      "status": "OPEN",
+      "createdAt": "2025-03-27T10:48:45.496Z",
+      "dueDate": "2025-08-30T00:00:00.000Z",
+      "documents": [
+        "https://example.com/crm-requirements.pdf"
+      ],
+      "skillsRequired": [
+        "10",
+        "24",
+        "23"
+      ],
+      "paymentMethod": "FIXED",
+      "assignedTo": null
+    }
+  ],
+  "bids": [],
+  "likes": [],
+  "bookmarks": [],
+  "lists": [],
+  "listItems": [],
+  "skills": [
+    {
+      "id": 1,
+      "name": "React"
+    },
+    {
+      "id": 2,
+      "name": "Node.js"
+    },
+    {
+      "id": 3,
+      "name": "MongoDB"
+    },
+    {
+      "id": 4,
+      "name": "Python"
+    },
+    {
+      "id": 5,
+      "name": "TensorFlow"
+    },
+    {
+      "id": 6,
+      "name": "NLP"
+    },
+    {
+      "id": 7,
+      "name": "Flutter"
+    },
+    {
+      "id": 8,
+      "name": "Dart"
+    },
+    {
+      "id": 9,
+      "name": "Firebase"
+    },
+    {
+      "id": 10,
+      "name": "Angular"
+    },
+    {
+      "id": 11,
+      "name": "Vue.js"
+    },
+    {
+      "id": 12,
+      "name": "Java"
+    },
+    {
+      "id": 13,
+      "name": "Spring Boot"
+    },
+    {
+      "id": 14,
+      "name": "Kotlin"
+    },
+    {
+      "id": 15,
+      "name": "Swift"
+    },
+    {
+      "id": 16,
+      "name": "Machine Learning"
+    },
+    {
+      "id": 17,
+      "name": "Deep Learning"
+    },
+    {
+      "id": 18,
+      "name": "Data Science"
+    },
+    {
+      "id": 19,
+      "name": "SQL"
+    },
+    {
+      "id": 20,
+      "name": "PostgreSQL"
+    },
+    {
+      "id": 21,
+      "name": "MySQL"
+    },
+    {
+      "id": 22,
+      "name": "GraphQL"
+    },
+    {
+      "id": 23,
+      "name": "Docker"
+    },
+    {
+      "id": 24,
+      "name": "Kubernetes"
+    },
+    {
+      "id": 25,
+      "name": "AWS"
+    },
+    {
+      "id": 26,
+      "name": "Azure"
+    },
+    {
+      "id": 27,
+      "name": "Google Cloud"
+    },
+    {
+      "id": 28,
+      "name": "Cybersecurity"
+    },
+    {
+      "id": 29,
+      "name": "Blockchain"
+    },
+    {
+      "id": 30,
+      "name": "Rust"
+    },
+    {
+      "id": 31,
+      "name": "Go"
+    },
+    {
+      "id": 32,
+      "name": "C++"
+    },
+    {
+      "id": 33,
+      "name": "C#"
+    },
+    {
+      "id": 34,
+      "name": "PHP"
+    },
+    {
+      "id": 35,
+      "name": "Laravel"
+    },
+    {
+      "id": 36,
+      "name": "Django"
+    },
+    {
+      "id": 37,
+      "name": "FastAPI"
+    },
+    {
+      "id": 38,
+      "name": "Ruby on Rails"
+    },
+    {
+      "id": 39,
+      "name": "TypeScript"
+    },
+    {
+      "id": 40,
+      "name": "JavaScript"
+    },
+    {
+      "id": 41,
+      "name": "HTML"
+    },
+    {
+      "id": 42,
+      "name": "CSS"
+    },
+    {
+      "id": 43,
+      "name": "Tailwind CSS"
+    },
+    {
+      "id": 44,
+      "name": "Bootstrap"
+    }
+  ],
+  "countries": [
+    {
+      "id": 1,
+      "name": "United States"
+    },
+    {
+      "id": 2,
+      "name": "Canada"
+    },
+    {
+      "id": 3,
+      "name": "United Kingdom"
+    },
+    {
+      "id": 4,
+      "name": "India"
+    },
+    {
+      "id": 5,
+      "name": "Germany"
+    },
+    {
+      "id": 6,
+      "name": "France"
+    },
+    {
+      "id": 7,
+      "name": "Australia"
+    },
+    {
+      "id": 8,
+      "name": "Brazil"
+    },
+    {
+      "id": 9,
+      "name": "Japan"
+    },
+    {
+      "id": 10,
+      "name": "China"
+    },
+    {
+      "id": 11,
+      "name": "Russia"
+    },
+    {
+      "id": 12,
+      "name": "South Korea"
+    },
+    {
+      "id": 13,
+      "name": "Italy"
+    },
+    {
+      "id": 14,
+      "name": "Mexico"
+    },
+    {
+      "id": 15,
+      "name": "Spain"
+    },
+    {
+      "id": 16,
+      "name": "Netherlands"
+    },
+    {
+      "id": 17,
+      "name": "Switzerland"
+    },
+    {
+      "id": 18,
+      "name": "Sweden"
+    },
+    {
+      "id": 19,
+      "name": "Norway"
+    },
+    {
+      "id": 20,
+      "name": "Denmark"
+    },
+    {
+      "id": 21,
+      "name": "Finland"
+    },
+    {
+      "id": 22,
+      "name": "New Zealand"
+    },
+    {
+      "id": 23,
+      "name": "Singapore"
+    },
+    {
+      "id": 24,
+      "name": "South Africa"
+    },
+    {
+      "id": 25,
+      "name": "Argentina"
+    },
+    {
+      "id": 26,
+      "name": "Indonesia"
+    },
+    {
+      "id": 27,
+      "name": "Pakistan"
+    },
+    {
+      "id": 28,
+      "name": "Bangladesh"
+    },
+    {
+      "id": 29,
+      "name": "Turkey"
+    },
+    {
+      "id": 30,
+      "name": "Saudi Arabia"
+    },
+    {
+      "id": 31,
+      "name": "United Arab Emirates"
+    }
+  ],
+  "languages": [
+    {
+      "id": 1,
+      "name": "English"
+    },
+    {
+      "id": 2,
+      "name": "Spanish"
+    },
+    {
+      "id": 3,
+      "name": "Mandarin"
+    },
+    {
+      "id": 4,
+      "name": "Hindi"
+    },
+    {
+      "id": 5,
+      "name": "French"
+    },
+    {
+      "id": 6,
+      "name": "Arabic"
+    },
+    {
+      "id": 7,
+      "name": "Bengali"
+    },
+    {
+      "id": 8,
+      "name": "Portuguese"
+    },
+    {
+      "id": 9,
+      "name": "Russian"
+    },
+    {
+      "id": 10,
+      "name": "Japanese"
+    },
+    {
+      "id": 11,
+      "name": "German"
+    },
+    {
+      "id": 12,
+      "name": "Korean"
+    },
+    {
+      "id": 13,
+      "name": "Italian"
+    },
+    {
+      "id": 14,
+      "name": "Turkish"
+    },
+    {
+      "id": 15,
+      "name": "Vietnamese"
+    },
+    {
+      "id": 16,
+      "name": "Tamil"
+    },
+    {
+      "id": 17,
+      "name": "Urdu"
+    },
+    {
+      "id": 18,
+      "name": "Persian"
+    },
+    {
+      "id": 19,
+      "name": "Polish"
+    },
+    {
+      "id": 20,
+      "name": "Dutch"
+    },
+    {
+      "id": 21,
+      "name": "Greek"
+    },
+    {
+      "id": 22,
+      "name": "Hebrew"
+    },
+    {
+      "id": 23,
+      "name": "Thai"
+    },
+    {
+      "id": 24,
+      "name": "Swedish"
+    },
+    {
+      "id": 25,
+      "name": "Czech"
+    },
+    {
+      "id": 26,
+      "name": "Hungarian"
+    },
+    {
+      "id": 27,
+      "name": "Romanian"
+    },
+    {
+      "id": 28,
+      "name": "Danish"
+    },
+    {
+      "id": 29,
+      "name": "Finnish"
+    },
+    {
+      "id": 30,
+      "name": "Norwegian"
+    },
+    {
+      "id": 31,
+      "name": "Ukrainian"
+    },
+    {
+      "id": 32,
+      "name": "Malay"
+    },
+    {
+      "id": 33,
+      "name": "Filipino"
+    },
+    {
+      "id": 34,
+      "name": "Swahili"
+    },
+    {
+      "id": 35,
+      "name": "Slovak"
+    },
+    {
+      "id": 36,
+      "name": "Bulgarian"
+    },
+    {
+      "id": 37,
+      "name": "Assamese"
+    },
+    {
+      "id": 39,
+      "name": "Bodo"
+    },
+    {
+      "id": 40,
+      "name": "Dogri"
+    },
+    {
+      "id": 41,
+      "name": "Gujarati"
+    },
+    {
+      "id": 43,
+      "name": "Kannada"
+    },
+    {
+      "id": 44,
+      "name": "Kashmiri"
+    },
+    {
+      "id": 45,
+      "name": "Konkani"
+    },
+    {
+      "id": 46,
+      "name": "Maithili"
+    },
+    {
+      "id": 47,
+      "name": "Malayalam"
+    },
+    {
+      "id": 48,
+      "name": "Manipuri"
+    },
+    {
+      "id": 49,
+      "name": "Marathi"
+    },
+    {
+      "id": 50,
+      "name": "Nepali"
+    },
+    {
+      "id": 51,
+      "name": "Odia"
+    },
+    {
+      "id": 52,
+      "name": "Punjabi"
+    },
+    {
+      "id": 53,
+      "name": "Sanskrit"
+    },
+    {
+      "id": 54,
+      "name": "Santali"
+    },
+    {
+      "id": 55,
+      "name": "Sindhi"
+    },
+    {
+      "id": 57,
+      "name": "Telugu"
+    }
+  ]
+}
