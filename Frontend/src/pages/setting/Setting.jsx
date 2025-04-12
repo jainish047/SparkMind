@@ -19,6 +19,7 @@ export default function Setting() {
     // { path: "", label: "Default" },
     { path: "editprofile", label: "Edit Profile" },
     { path: "changepassword", label: "Change Password" },
+    { path: "editbankaccdetails", label: "Bank Account Details" },
   ];
 
   if (!user) {

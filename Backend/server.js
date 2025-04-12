@@ -20,7 +20,8 @@ import generalRouter from "./routes/generalRoutes.js";
 import listsRouter from "./routes/listsRoutes.js";
 import freelancersRouter from "./routes/freelancersRoutes.js";
 import messagesRouter from "./routes/messageRoutes.js";
-import blogRouter from "./routes/blogRoutes.js"
+import blogRouter from "./routes/blogRoutes.js";
+import bankAccountRouter from "./routes/backaccountDetailsRoutes.js";
 
 import prisma from "./prisma/prismaClient.js";
 
@@ -79,6 +80,23 @@ app.use(
 );
 app.use("/api/messages", messagesRouter);
 app.use("/api/blogs", blogRouter);
+app.use(
+  "/api/bank-account",
+  (req, res, next) => {
+    passport.authenticate("jwt", { session: false }, (err, user, info) => {
+      if (err)
+        return res.status(500).json({ message: "Internal server error" });
+      if (!user)
+        return res
+          .status(401)
+          .json({ message: info?.message || "Unauthorized" });
+
+      req.user = user;
+      next(); // Proceed to listsRouter
+    })(req, res, next);
+  },
+  bankAccountRouter
+);
 
 // Socket.IO JWT Auth Middleware
 io.use(async (socket, next) => {
@@ -120,13 +138,13 @@ io.on("connection", (socket) => {
       include: {
         sender: {
           select: {
-            id:true,
+            id: true,
             name: true,
           },
         },
         receiver: {
           select: {
-            id:true,
+            id: true,
             name: true,
           },
         },

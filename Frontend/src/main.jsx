@@ -34,6 +34,7 @@ import ConfirmationPage from "./pages/PostProjectButtonPage/ConfirmationPage.jsx
 import PaymentAndBudget from "./pages/PostProjectButtonPage/PaymentAndBudget.jsx";
 import ChatPage from "./pages/Chat/Chat.jsx";
 import PaymentSetup from "./pages/Payment.jsx";
+import BankAccountForm from "./pages/transaction/accountDetails.jsx";
 
 const Router = createBrowserRouter([
   {
@@ -162,8 +163,11 @@ const Router = createBrowserRouter([
           },
           {
             path: "changepassword",
-
             element: <ChangePW />,
+          },
+          {
+            path: "editbankaccdetails",
+            element: <BankAccountForm />,
           },
         ],
       },

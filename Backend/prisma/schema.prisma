@@ -14,42 +14,44 @@ datasource db {
 }
 
 model user {
-  id                  String     @id @default(uuid())
+  id                  String                  @id @default(uuid())
   name                String?
   profilePic          String?
-  email               String     @unique
-  profileComplete     Boolean    @default(false)
+  email               String                  @unique
+  profileComplete     Boolean                 @default(false)
   role                UserRole
   password            String?
-  provider            String     @default("local")
+  provider            String                  @default("local")
   googleId            String?
   phoneNumber         String?
   bio                 String?
   skills              String[]
   location            String?
   country             String?
-  active              Boolean    @default(true)
+  active              Boolean                 @default(true)
   dob                 DateTime?
   languages           String[]
-  rating              Float?     @default(0)
+  rating              Float?                  @default(0)
   experience          Json?
-  dateJoined          DateTime?  @default(now())
-  emailVerified       Boolean    @default(false)
-  phoneNumberVerified Boolean    @default(false)
-  projects            project[]  @relation("ClientProjects")
-  bids                bid[]      @relation("UserBids")
-  freelancingProjects project[]  @relation("FreelancerProjects")
+  dateJoined          DateTime?               @default(now())
+  emailVerified       Boolean                 @default(false)
+  phoneNumberVerified Boolean                 @default(false)
+  projects            project[]               @relation("ClientProjects")
+  bids                bid[]                   @relation("UserBids")
+  freelancingProjects project[]               @relation("FreelancerProjects")
   bookmarks           bookmark[]
   lists               list[]
   listItems           listItem[]
-  sentMessages        Message[]  @relation("SentMessages")
-  receivedMessages    Message[]  @relation("ReceivedMessages")
-  blogs               Blog[]     @relation("blog")
-  bankAccount         BankAccount? @relation("BankAccount")
-  paid                transaction [] @relation("FromUser")
-  received           transaction[] @relation("ToUser")
+  sentMessages        Message[]               @relation("SentMessages")
+  receivedMessages    Message[]               @relation("ReceivedMessages")
+  blogs               Blog[]                  @relation("blog")
+  bankAccount         BankAccount?            @relation("BankAccount")
+  paid                transaction[]           @relation("FromUser")
+  received            transaction[]           @relation("ToUser")
+  // Removed redundant transactions field (@relation("UserTransactions"))
+  transactionDetails  UserTransactionDetail[] // Added to complete the relation with UserTransactionDetail
 
-  // Add these fields to resolve the relation error:
+  // Relations for following/followers
   following follow[] @relation("FollowerRelation")
   followers follow[] @relation("FollowingRelation")
 }
@@ -74,11 +76,11 @@ model project {
   noOfBids               Int?          @default(0)
   averageBidBudget       Int?          @default(0)
   bids                   bid[]         @relation("ProjectBids") // All bids on this project
-  assignedTo             String?       // Nullable, as it may not be assigned to anyone initially
+  assignedTo             String? // Nullable, as it may not be assigned to anyone initially
   freelancer             user?         @relation("FreelancerProjects", fields: [assignedTo], references: [id], onDelete: SetNull)
   bookmarks              bookmark[] // Bookmarks for this project
   listItems              listItem[] // List items for this project
-  transactions          transaction[] // Transactions related to this project
+  transactions           transaction[] // Transactions related to this project
   milestones             milestone[] // Milestones related to this project
 }
 
@@ -209,30 +211,32 @@ model Blog {
 }
 
 model BankAccount {
-  id                 String   @id @default(uuid())
-  userId             String   @unique
-  user               user     @relation("BankAccount", fields: [userId], references: [id])
-  accountNumber      String
-  ifsc               String
-  accountHolderName  String
-  verified           Boolean  @default(false)
-  createdAt          DateTime @default(now())
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  user              user     @relation("BankAccount", fields: [userId], references: [id])
+  accountNumber     String
+  ifsc              String
+  accountHolderName String
+  verified          Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  upiId             String
 }
 
-model transaction {
-  id            String      @id @default(uuid())
-  fromUserId    String?
-  toUserId      String?
-  projectId     String?
-  milestoneId   String?
-  amount        Float
-  type          TransactionType // ASSIGNMENT_PAYMENT | MILESTONE_PAYOUT
-  status        TransactionStatus // PENDING | SUCCESS | FAILED
-  createdAt     DateTime    @default(now())
+model milestone {
+  id          String          @id @default(uuid())
+  projectId   String
+  title       String
+  amount      Float
+  status      MilestoneStatus // e.g. PENDING, COMPLETED, or PAID
+  dueDate     DateTime?
+  completedAt DateTime?
 
-  fromUser      user?       @relation("FromUser", fields: [fromUserId], references: [id])
-  toUser        user?       @relation("ToUser", fields: [toUserId], references: [id])
-  project       project?    @relation(fields: [projectId], references: [id])
+  project     project      @relation(fields: [projectId], references: [id])
+  // The transaction relation is now handled via transaction.milestone relation.
+  transaction transaction? @relation("transfer") // just the relation name here}
+
+  blockchainTx   BlockchainTransaction? @relation(fields: [blockchainTxId], references: [id])
+  blockchainTxId String?
 }
 
 enum TransactionType {
@@ -246,21 +250,56 @@ enum TransactionStatus {
   FAILED
 }
 
-model milestone {
-  id          String    @id @default(uuid())
-  projectId   String
-  title       String
+model transaction {
+  id          String            @id @default(uuid())
+  fromUserId  String
+  toUserId    String
+  projectId   String? // Optional—if the transaction is tied to a project.
+  milestoneId String?           @unique // Optional—if it’s a milestone payout.
   amount      Float
-  status      MilestoneStatus // PENDING | COMPLETED | PAID
-  dueDate     DateTime?
-  completedAt DateTime?
+  currency    String
+  type        TransactionType // e.g. ASSIGNMENT_PAYMENT, MILESTONE_PAYOUT
+  status      TransactionStatus // PENDING, SUCCESS, or FAILED
+  timestamp   DateTime          @default(now())
 
-  project     project   @relation(fields: [projectId], references: [id])
-  // transactions transaction[]
+  fromUser  user                    @relation("FromUser", fields: [fromUserId], references: [id])
+  toUser    user                    @relation("ToUser", fields: [toUserId], references: [id])
+  project   project?                @relation(fields: [projectId], references: [id])
+  milestone milestone?              @relation("transfer", fields: [milestoneId], references: [id])
+  details   UserTransactionDetail[]
+
+  blockchainTx   BlockchainTransaction? @relation(fields: [blockchainTxId], references: [id])
+  blockchainTxId String?
+}
+
+model UserTransactionDetail {
+  id            String  @id @default(uuid())
+  userId        String
+  transactionId String
+  description   String? // Additional notes, e.g. "Milestone payout for UI Design"
+  category      String? // E.g. "Milestone", "Assignment", etc.
+  notes         String?
+
+  user        user        @relation(fields: [userId], references: [id])
+  transaction transaction @relation(fields: [transactionId], references: [id])
 }
 
 enum MilestoneStatus {
   PENDING
   COMPLETED
   PAID
+}
+
+model BlockchainTransaction {
+  id            String        @id @default(uuid())
+  relatedEntity String // "transaction" or "milestone"
+  relatedId     String // ID of the transaction or milestone
+  txHash        String // Blockchain transaction hash
+  blockNumber   Int? // Optional: Block number where it was mined
+  chainName     String // e.g., "Ethereum", "Polygon", "BSC"
+  status        String // e.g., "pending", "confirmed", "failed"
+  createdAt     DateTime      @default(now())
+  confirmedAt   DateTime? // Optional: When the transaction was confirmed
+  milestone     milestone[]
+  transaction   transaction[]
 }
