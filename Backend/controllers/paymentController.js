@@ -1,137 +1,180 @@
-const assignFreelancer = async (req, res) => {
-  const { projectId } = req.params;
-  const { freelancerId, paymentDetails } = req.body;
-  const clientId = req.user.id;
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import prisma from "../prisma/prismaClient.js";
 
-  if (!projectId || !freelancerId) {
-    return res
-      .status(400)
-      .json({ message: "Missing projectId or freelancerId" });
-  }
 
+import { ethers } from "ethers";
+import contractArtifact from "../artifacts/contracts/Transactions.sol/Transactions.json"; // adjust if path differs
+
+export const initiatePayment = async (req, res) => {
   try {
-    const project = await prisma.project.findUnique({
-      where: { id: projectId },
-    });
+    console.log("doing transaction for:", req.transaction);
 
-    if (!project) return res.status(404).json({ message: "Project not found" });
-    if (project.assignedTo)
-      return res.status(400).json({ message: "Already assigned" });
+    const {
+      id,
+      fromUserId,
+      toUserId,
+      amount,
+      projectId,
+      milestoneId,
+      type,
+      currency,
+    } = req.transaction;
 
-    const fee = project.maxBudget * 0.1;
-
-    // Simulate payment (replace with real logic e.g. Stripe)
-    const paymentSuccess = true;
-
-    if (!paymentSuccess) {
-      return res.status(400).json({ message: "Payment failed" });
+    // Validate inputs (in real app)
+    if (!fromUserId || !toUserId || !amount) {
+      return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const result = await prisma.$transaction([
+    const orderId = `order_${uuidv4()}`;
+
+    // Create order on Cashfree
+    const cashfreeRes = await axios.post(
+      "https://sandbox.cashfree.com/pg/orders",
+      {
+        order_id: orderId,
+        order_amount: Number(amount),
+        order_currency: "INR",
+        customer_details: {
+          customer_id: fromUserId,
+          customer_email: "buyer@example.com", // Optional: fetch from DB
+          customer_phone: "9999999999",
+        },
+        order_meta: {
+          return_url: `http://localhost:5173/projects/${projectId}`, // frontend url
+          notify_url: `https://0fd1-2402-3a80-4642-b344-ccfe-c567-93e3-cdbf.ngrok-free.app/api/payment/webhook`,
+        },
+      },
+      {
+        headers: {
+          "x-client-id": process.env.CASHFREE_APP_ID,
+          "x-client-secret": process.env.CASHFREE_SECRET_KEY,
+          "x-api-version": "2022-09-01",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const sessionId = cashfreeRes.data.payment_session_id;
+    // const rawSessionId = cashfreeRes.data.payment_session_id;
+    // const sessionId = rawSessionId.replace(/paymentpayment$/, "");
+
+    // const [updatedProject, transaction] = await prisma.$transaction([
+    //   prisma.project.update({
+    //     where: { id: req.transaction.projectId },
+    //     data: {
+    //       assignedTo: req.transaction.toUserId,
+    //       status: "IN_PROGRESS", // make sure enum is valid
+    //     },
+    //   }),
+    //   prisma.transaction.update({
+    //     where: { id: id },
+    //     data: {
+    //       // fromUserId,
+    //       fromUser:{
+    //         connect:{
+    //           id:fromUserId
+    //         }
+    //       },
+    //       // toUserId,
+    //       toUser:{
+    //         connect:{
+    //           id:toUserId
+    //         }
+    //       },
+    //       amount: parseFloat(amount),
+    //       status: "SUCCESS",
+    //       // gateway: "CASHFREE",
+    //       currency,
+    //       // projectId,
+    //       project:{
+    //         connect:{
+    //           id:projectId
+    //         }
+    //       },
+    //       type,
+    //     },
+    //   }),
+    // ]);
+
+    console.log("Cashfree Response:", cashfreeRes.data);
+    console.log("Cashfree Session ID:", sessionId);
+    console.log("Cashfree Order ID:", orderId);
+
+    return res.json({
+      success: true,
+      payment_session_id: sessionId,
+      order_id: orderId,
+    });
+    // return res.redirect(`https://sandbox.cashfree.com/pg/viewPayment?payment_session_id=${sessionId}`);
+  } catch (err) {
+    console.error("Cashfree Error:", err.response?.data || err.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Failed to initiate payment" });
+  }
+};
+
+const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+
+// Replace with your actual Hardhat private key (you get it from `npx hardhat node`)
+const signer = new ethers.Wallet("0xYOUR_HARDHAT_PRIVATE_KEY", provider);
+
+// Replace with your deployed smart contract address
+const contractAddress = "0xYOUR_DEPLOYED_CONTRACT_ADDRESS";
+
+const contract = new ethers.Contract(contractAddress, contractArtifact.abi, signer);
+
+export const handleCashfreeWebhook = async (req, res) => {
+  try {
+    const { data, type } = req.body;
+
+    console.log("------->Webhook received:", req.body);
+
+    if (type !== "PAYMENT_SUCCESS_WEBHOOK") {
+      return res.status(400).send("Unsupported webhook type");
+    }
+
+    const { order_id } = data.order;
+
+    const transaction = await prisma.transaction.findFirst({
+      where: { orderId: order_id },
+    });
+
+    if (!transaction) return res.status(404).send("Transaction not found");
+
+    // Prisma DB update
+    await prisma.$transaction([
+      prisma.transaction.update({
+        where: { id: transaction.id },
+        data: {
+          status: "SUCCESS",
+          paymentGatewayId: data.payment.cf_payment_id,
+          currency: data.payment.payment_currency,
+          paymentTime: new Date(data.payment.payment_time),
+        },
+      }),
       prisma.project.update({
-        where: { id: projectId },
+        where: { id: transaction.projectId },
         data: {
-          assignedTo: freelancerId,
-          status: "ASSIGNED",
-        },
-      }),
-      prisma.payment.create({
-        data: {
-          userId: clientId,
-          projectId,
-          amount: fee,
-          type: "ASSIGNMENT_FEE",
-          status: "COMPLETED",
+          assignedTo: transaction.toUserId,
+          status: "IN_PROGRESS",
         },
       }),
     ]);
 
-    res.json({ message: "Freelancer assigned & payment done", result });
+    // Blockchain update
+    await contract.addToBlockchain(
+      transaction.toWalletAddress,                                 // receiver wallet address
+      ethers.parseEther(data.payment.payment_amount.toString()),  // amount in ETH format
+      `Payment for order ${order_id}`,                             // message
+      "freelance"                                                  // keyword
+    );
+
+    res.status(200).send("Webhook received and blockchain updated");
   } catch (err) {
-    console.error("assignFreelancer error:", err);
-    res.status(500).json({ message: "Internal error" });
+    console.error("[Cashfree Webhook Error]", err.message);
+    res.status(500).send("Internal server error");
   }
 };
 
-const completeMilestone = async (req, res) => {
-  const { projectId } = req.params;
-  const { milestoneId, freelancerId } = req.body;
-
-  if (!projectId || !milestoneId || !freelancerId) {
-    return res
-      .status(400)
-      .json({ message: "Missing projectId, milestoneId, or freelancerId" });
-  }
-
-  try {
-    const bid = await prisma.bid.findFirst({
-      where: { projectId, userId: freelancerId },
-    });
-
-    if (!bid) return res.status(404).json({ message: "Bid not found" });
-
-    const milestones = bid.milestones || [];
-    const index = milestones.findIndex((m) => m.id === milestoneId);
-
-    if (index === -1)
-      return res.status(404).json({ message: "Milestone not found" });
-    if (milestones[index].status === "COMPLETED")
-      return res.status(400).json({ message: "Milestone already completed" });
-
-    milestones[index].status = "COMPLETED";
-    const payAmount = milestones[index].amount;
-
-    // Simulate payout (replace with real logic e.g. Razorpay/Stripe Connect)
-    const payoutSuccess = true;
-
-    if (!payoutSuccess) {
-      return res.status(400).json({ message: "Payout failed" });
-    }
-
-    const result = await prisma.$transaction([
-      prisma.bid.update({
-        where: { id: bid.id },
-        data: { milestones },
-      }),
-      prisma.payment.create({
-        data: {
-          userId: freelancerId,
-          projectId,
-          amount: payAmount,
-          type: "MILESTONE_PAYMENT",
-          status: "COMPLETED",
-        },
-      }),
-    ]);
-
-    res.json({
-      message: "Milestone marked complete & freelancer paid",
-      result,
-    });
-  } catch (err) {
-    console.error("completeMilestone error:", err);
-    res.status(500).json({ message: "Internal error" });
-  }
-};
-
-export async function verifyAccount(req, res) {
-    const { accountNumber, ifsc, accountHolderName } = req.body;
-    const userId = req.user.id;
-  
-    // Assume external API call for bank verification success
-    const verified = true;
-  
-    if (verified) {
-      await prisma.bankAccount.upsert({
-        where: { userId },
-        update: { accountNumber, ifsc, accountHolderName, verified: true },
-        create: { userId, accountNumber, ifsc, accountHolderName, verified: true },
-      });
-      return res.status(200).send({ message: "Account verified" });
-    }
-  
-    return res.status(400).send({ message: "Verification failed" });
-  }
-
-  
-  

@@ -22,6 +22,7 @@ import freelancersRouter from "./routes/freelancersRoutes.js";
 import messagesRouter from "./routes/messageRoutes.js";
 import blogRouter from "./routes/blogRoutes.js";
 import bankAccountRouter from "./routes/backaccountDetailsRoutes.js";
+import paymentRouter from "./routes/paymentRoutes.js"
 
 import prisma from "./prisma/prismaClient.js";
 
@@ -80,6 +81,7 @@ app.use(
 );
 app.use("/api/messages", messagesRouter);
 app.use("/api/blogs", blogRouter);
+app.use("/api/payment", paymentRouter)
 app.use(
   "/api/bank-account",
   (req, res, next) => {

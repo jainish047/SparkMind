@@ -136,11 +136,13 @@ async function filterProjects(req, res) {
   }
 }
 
-export async function assignProjectToFreelancer(projectId, freelancerId) {
+export async function assignProjectToFreelancer(req, res, next) {
+  console.log("assiging for bid:", req.body)
+  const bid = req.body.bid;
   try {
     // 1. Validate project exists
     const project = await prisma.project.findUnique({
-      where: { id: projectId },
+      where: { id: bid.projectId },
     });
 
     if (!project) {
@@ -154,34 +156,28 @@ export async function assignProjectToFreelancer(projectId, freelancerId) {
 
     // 3. Validate freelancer existence
     const freelancer = await prisma.user.findUnique({
-      where: { id: freelancerId },
+      where: { id: bid.user.id },
     });
 
     if (!freelancer) {
       throw new Error("Freelancer not found");
     }
 
-    // 4. Update project assignment
-    const updatedProject = await prisma.project.update({
-      where: { id: projectId },
+    const transaction = await prisma.transaction.create({
       data: {
-        assignedTo: freelancerId,
-        status: "IN_PROGRESS", // make sure enum is valid
+        fromUserId: req.user.id,
+        toUserId: bid.user.id,
+        projectId: bid.projectId,
+        amount: bid.amount,
+        status: "PENDING",
+        currency: "Rupees",
+        type: "ASSIGNMENT_PAYMENT",
       },
     });
 
-    // Assume internal transaction: user -> platform
-  // const paymentProcessed = true;
-
-  // if (paymentProcessed) {
-  //   await prisma.project.update({
-  //     where: { id: projectId },
-  //     data: { assignedTo: freelancerId },
-  //   });
-  //   return res.status(200).send({ message: "Freelancer assigned and payment done" });
-  // }
-
-    return updatedProject;
+    // return transaction;
+    req.transaction = transaction;
+    next()
   } catch (error) {
     console.error("[assignProjectToFreelancer]", error);
     throw new Error(error.message || "Failed to assign project");

@@ -25,50 +25,32 @@ import { useNavigate } from "react-router-dom";
 
 export default function BidComponent({ bid }) {
   const [loading, setLoading] = useState(false);
-  const {toast} = useToast();
+  const { toast } = useToast();
   const navigate = useNavigate();
 
   const handleAssign = async () => {
     setLoading(true);
     try {
-      // const response = await fetch("/api/assign-project", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     projectId,
-      //     freelancerId: bid.user.id,
-      //   }),
-      // });
-      const response = await assignProject(
-        bid.projectId,
-        bid.user.id
-      );
+      const response = await assignProject(bid);
 
-      // if (!response.ok) {
-      //   // const data = await response.json();
-      //   throw new Error(data.error || "Failed to assign project");
-      // }
+      console.log("response from assign:", response, response.data);
 
-      // toast.success("Project assigned successfully!");
-      toast({
-        title:"Project Assigned",
-        description: `to ${bid.user.name}`,
-        // action: {
-        //   title: "View Project",
-        //   onClick: () => {
-        //     window.location.href = `/projects/${bid.projectId}`;
-        //   },
-        // },
-      })
-      navigate(`/projects`);
+      const cashfree = Cashfree({ mode: "sandbox" });
+      cashfree.checkout({
+        paymentSessionId: response.data.payment_session_id,
+        redirectTarget: "_self",
+      });
+
+      // ✅ Use correct redirect URL
+      // window.location.href = `https://sandbox.cashfree.com/pg/viewPayment?payment_session_id=${response.data.payment_session_id}`;
+
+      // 👇 This will never run, since page is redirected
+      // navigate(`/projects`);
     } catch (err) {
       console.error(err);
-      // toast.error(err.message);
       toast({
         title: "Error",
-        description: err.response?.data?.message ||err.message,
+        description: err.response?.data?.message || err.message,
         variant: "destructive",
       });
     } finally {

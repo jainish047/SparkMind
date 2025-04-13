@@ -71,9 +71,9 @@ export async function getBids() {
   }
 }
 
-export async function assignProject(projectId, freelancerId) {
+export async function assignProject(bid) {
   return api
-    .post(`/projects/assign-project`, { projectId, freelancerId })
+    .post(`/projects/assign-project`, { bid })
     .then((res) => {
       console.log("project assigned successfully");
       return res;
