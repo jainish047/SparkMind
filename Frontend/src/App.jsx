@@ -11,6 +11,9 @@ import { getToken } from "./API/authentication";
 import { getLists } from "./context/listSlice";
 import { SocketProvider } from "./context/SocketProvide.jsx";
 
+import { CopilotPopup } from "@copilotkit/react-ui";
+import RootLayout from "../app/layout.jsx";
+
 function App() {
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
@@ -48,15 +51,28 @@ function App() {
   }, [token, dispatch]);
 
   return (
-    <SocketProvider>
-      <div className="grid grid-rows-[60px,1fr] h-screen w-screen overflow-hidden">
-        <Header />
-        <div className="h-full w-full overflow-y-auto overflow-x-hidden border">
-          <Outlet />
+    <RootLayout>
+      <SocketProvider>
+        <div className="grid grid-rows-[60px,1fr] h-screen w-screen overflow-hidden">
+          <Header />
+          <div className="h-full w-full overflow-y-auto overflow-x-hidden border">
+            <Outlet />
+          </div>
+          <Toaster />
         </div>
-        <Toaster />
-      </div>
-    </SocketProvider>
+        {user && (
+          <CopilotPopup
+            instructions={
+              "You are assisting the user as best as you can. Answer in the best way possible given the data you have."
+            }
+            labels={{
+              title: "Popup Assistant",
+              initial: "Need any help?",
+            }}
+          />
+        )}
+      </SocketProvider>
+    </RootLayout>
   );
 }
 
