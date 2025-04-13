@@ -4,7 +4,15 @@ import prisma from "../prisma/prismaClient.js";
 
 
 import { ethers } from "ethers";
-import contractArtifact from "../artifacts/contracts/Transactions.sol/Transactions.json"; // adjust if path differs
+// import contractArtifact from './artifacts/contracts/Transactions.sol/Transactions.json' assert { type: "json" };
+
+import fs from 'fs';
+import path from 'path';
+
+const contractPath = path.resolve('artifacts/contracts/Transactions.sol/Transactions.json');
+const contractArtifact = JSON.parse(fs.readFileSync(contractPath, 'utf-8'));
+
+console.log("contract artifact:--->", contractArtifact); // You can now use contractArtifact as you normally would.
 
 export const initiatePayment = async (req, res) => {
   try {
@@ -118,10 +126,10 @@ export const initiatePayment = async (req, res) => {
 const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
 
 // Replace with your actual Hardhat private key (you get it from `npx hardhat node`)
-const signer = new ethers.Wallet("0xYOUR_HARDHAT_PRIVATE_KEY", provider);
+const signer = new ethers.Wallet("0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80", provider);
 
 // Replace with your deployed smart contract address
-const contractAddress = "0xYOUR_DEPLOYED_CONTRACT_ADDRESS";
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const contract = new ethers.Contract(contractAddress, contractArtifact.abi, signer);
 
@@ -164,12 +172,20 @@ export const handleCashfreeWebhook = async (req, res) => {
     ]);
 
     // Blockchain update
-    await contract.addToBlockchain(
-      transaction.toWalletAddress,                                 // receiver wallet address
-      ethers.parseEther(data.payment.payment_amount.toString()),  // amount in ETH format
-      `Payment for order ${order_id}`,                             // message
-      "freelance"                                                  // keyword
+    console.log("Updating blockchain...");
+    const tx = await contract.addToBlockchain(
+      transaction.toWalletAddress, // receiver wallet address
+      ethers.parseEther(data.payment.payment_amount.toString()), // amount in ETH format
+      `Payment for order ${order_id}`, // message
+      "freelance" // keyword
     );
+
+    // Wait for transaction to be mined
+    console.log("Waiting for blockchain transaction to be mined...");
+    const receipt = await tx.wait(); // Wait until the transaction is mined
+
+    // Log the transaction receipt details
+    console.log("Blockchain transaction mined:", receipt);
 
     res.status(200).send("Webhook received and blockchain updated");
   } catch (err) {
@@ -177,4 +193,3 @@ export const handleCashfreeWebhook = async (req, res) => {
     res.status(500).send("Internal server error");
   }
 };
-
